@@ -1,0 +1,15 @@
+:root {
+    --bg-color: rgb(24, 26, 27);
+    --nav-color: rgb(36, 39, 41);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: white;
+}
+nav {
+    background-color: var(--nav-color) !important;
+}
+nav * {
+    color: white !important;
+}
