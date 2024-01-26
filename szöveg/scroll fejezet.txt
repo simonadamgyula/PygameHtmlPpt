@@ -1,0 +1,32 @@
+Bevezetés:
+    Jelenleg a karakter csak a képernyőn látható területet képes bejárni, de a scroll megoldásával a pálya többi részére is eljuthat.
+    Scroll: a képernyő eltolása
+    cél: amikor a játékos eléri a pálya szélét, nem engedjük a játékost tovább, hanem helyette a csempéket fogjuk mozgatni. Ez azt a hatást kelti, hogy a játékos továbbra is abba az irányba halad.
+
+Level class:
+    world_shift változó: a pálya mozgásának értéke lesz.
+    3.10: def __init__: self.world_shift = 0: amikor a játékos a képernyő közepső sávjában áll, akkor a játékos maga mozog, a csempe mozdulatlan.
+    3.30: új, scrollozásért felelős metódus: def scroll_x:
+        4.50-ig: 3 globális változóra hivatkozik locálisan, hogy egyszerűbb legyen megírnia  a kódót:
+            player: magának a player változó tartalmát éri eljuthat
+            player_x: a játékoshoz tartozó rect objectumnak a centerx értékére hivatkozik
+            direction_x: a player-hez tartozó direction attribútumnak az x összetevője
+        5.13: if player_x < screen_width / 4 and direction_x < 0: ha a player_x értéke kisebb mint a képernyő egynegyede, szóval ha a játékos eléri a képernyő bal oldalának egynegyedét és továbbra is balra szeretne menni
+            a world_shift értékét 8-ra állítja, azaz a képernyő jobbra fog mozdulni 8 pixel sebességgel
+            a player.speed változót 0-ra rakja, hogy a játékos ne mozduljon
+        7.19: elif player_x > screen_width - screen_width / 4 and direction_x > 0: ha a player_x értéke nagyobb mint a képernyő szélességének a háromnegyede, szóval ha játékos eléri a képernyő jobb oldalán a háromnegyedét és továbbra is jobbra szeretne haladni
+            a world shift értéke -8, hogy a képernyő balra haladjon
+            és a player speed szintén nulla, mert a játékos itt se mozdulhat
+        8.52: végül egy else ágat is létrehoz: leállítja a képernyő mozgását és beállítja a player_speed változót 8-ra, hogy újra a játékos mozogjon
+    10.00: a def run metódust kiegészíti és meghívja a scroll_x metódust, hogy fusson
+    így még a csempék nem mozdulnak, csak a játékost állítja meg
+
+Tile class:
+    11.00: új metódus: update(self,shift): shift jelzi majd, hogy mennyivel kell eltolnunk és milyen irányban
+        self.rect.x += shift: meghívja a csempékre vonatkozó rect objectumnak az x összetevőjét, az összes olyan csempeosztályt, mely ennek(mutat) a leszármazottja rendelkezni fog ezzel a képességgel
+
+vissza a def run-hoz: meg kellhívja az update eljárást 
+nem szükséges nekünk minden egyes csempét bejárnunk, mivel a pygame ezt megcsinálja helyettünk
+self.terrain_tiles.update(self.world_shift): a zárójelben megadjuk az eltolás mértékét
+így a pygame helyettünk bejárja az összes csempe objectumot és mindegyiken meghívja az update metódust
+kipróbálja: jöhetnek a képek
