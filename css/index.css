@@ -1,4 +1,52 @@
+nav {
+    margin-bottom: 20px;
+}
+
 .featurette{
-    margin: 50px auto;
+    margin: 0 auto;
+    padding: 0 20px;
     max-width: 1300px;
+}
+
+.lead {
+    margin: 20px 0 50px;
+}
+
+.hr {
+    content: "";
+    max-width: 1200px;
+    height: 1px;
+    background-color: lightgray;
+    margin: 50px auto;
+}
+
+.featurette .btn {
+    width: 150px;
+}
+
+@media screen and (max-width: 1260px) {
+    .hr {
+        margin: 50px 30px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .featurette {
+        text-align: justify;
+
+        & div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        & .btn {
+            align-self: center;
+            margin-bottom: 30px;
+        } 
+    
+        & svg {
+            margin: auto;
+            display: block;
+        }
+    }
 }
