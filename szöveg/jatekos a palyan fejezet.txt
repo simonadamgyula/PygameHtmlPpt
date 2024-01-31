@@ -1,0 +1,50 @@
+Bevezetés:
+player class elkészítése és tulajdonságokkal való felruházása.
+Alap mozgási képességeket megvalósítja.
+
+Level class fejlesztése:
+Létrehoz egy tárolót: self.player = pygame.sprite.GroupSingle()
+A térképen "P" betű jelöli a játékos helyzetét.
+Karakter felismerése: if tile_type == 'P'
+A class végén kirajzoltatja a karaktert: self.player.draw(self.display_surface)
+
+Player class:
+5:30 - 6:10ig player classt létrehozza
+    def __init__(self, pos) metódus átveszi a x és y koordináták értékét.
+Az ős osztály inicializáló metódusának hívása:super.__init__()
+Két kötelező attributum:
+self.image = pygame.image.load('../img/player/Idle__000.png').convert_alpha()   self.rect = self.image.get_rect(topleft=pos): String formátumban megadja a fájlnak az elérési útvonalát.
+A mozgást vektor formában adja meg: self.direction = pygame.math.Vector2(0, 0):Az első érték gondoskodik az x irányú, a másik gondoskodik az y irányú elmozdulásról.
+self.speed: játékos gyorsaságának meghatározása
+self. gravity: A gravitáció erősségét határozza meg
+self.jump_speed: Az ugrás sebességét adja meg
+self.on_ground: Az elrugaszkodás csak akkor történhet meg ha a karakter a felszínen áll
+    def get_input(self): Figyeli a billentyűzet felől érkező információkat.
+    pygame.keys.get:pressed(): Eltárolja a billentyűzet felől érkező információkat
+    if keys[pygame.K_RIGHT]:
+        self.direction.x= 1     : Ha a jobb nyíl lenyomásra kerül, akkor az x tengelyen halad ebben az esetben 1-et
+    Egy else ággal definiálja a balra való mozgást, utána egy else ággal kizárja az x tengelyen való mozgást ha nin lenyomva a jobb vagy a bal nyíl.
+    SPACE billentyű figyelése:
+    if keys[pygame.K_SPACE] and self.on_ground
+    A játékos elhelyezkedésének y értékét egyenlővé teszi a gravitációt, így működik a gravitáció.
+    jump metódus létrehozása:
+    self.direction.y = self.jump_speed
+
+Ütkozések detektálása a Level class-ben:
+Vízszintes ütközéseket figyeli:
+Létrehoz egy player objektumot
+player.rect.x += player.direction.x * player.speed : Megnöveli az x koordináta értékét az elmozdulás irányának és a játékos sebességének a szorzatával.
+Bejárja a csempéket és megnézi, hogy bármelyik is ütközik e a karakterrel:
+for ciklust alkalmaz
+Fontos, hogy az ütközés milyen elmozdulás során történik és milyen irányból ütközik egynásnak a két objektum: prite.rect.colliderect(player.rect)
+Ütközés irányának megadása(mindig a játékos x irányú elmozdulását vesszük figyelembe): if player.direction.x < 0 -> tudjuk, hogy a csempe jobbról tartotta fel a játékosunkat
+player.rect.left = sprite.rect.right: Így a csempe nem engedi a jobb oldali mozgását a karakternek. Ezt másik irányból  irányból megcsinálja.
+Függőleges ütküzést figyeli:
+Létrehoz egy player objektumot
+alkalmazza a gravitácót: player.apply:gravity()
+Bejárja a csempéket egy for ciklussal
+Ütközés irányának megadása(Itt mindig az y irányú elmozdulást vesszük figyelembe): if player.direction.y < 0
+player.rect.bottom = sprite.rect.top: A játékos a platform tetejére érkezik. Meg kell akadályozni a további ütközéseket!
+player.on_ground = True: A játékos egy platformon áll. nincsenek további ütközések
+Ugyanezt megcsinálja a másik irányból való ütküzéssel, csak itt nem akadályozza meg a további ütközéseket.
+Végül hozzáadja a run metódushoz őket, hogy működjenek.
