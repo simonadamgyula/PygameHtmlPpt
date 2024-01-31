@@ -2,6 +2,19 @@
     scroll-margin: 66px;
 }
 
+a {
+    color: blue;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+._container {
+    max-width: 1500px;
+    margin: auto;
+}
+
 .code-snipet {
     background-color: transparent;
     border: 1px solid var(--gray);
@@ -120,6 +133,15 @@ code.hljs.language-python {
     width: 16rem;
     height: 100%;
     position: fixed;
+
+    & a {
+        color: rgb(170, 170, 170);
+        text-decoration: none;
+    
+        &:visited {
+            color: rgb(170, 170, 170);
+        }
+    }
 }
 
 #content {
