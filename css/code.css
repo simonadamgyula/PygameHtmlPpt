@@ -1,0 +1,149 @@
+* {
+    scroll-margin: 66px;
+}
+
+a {
+    color: blue;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+._container {
+    max-width: 1500px;
+    margin: auto;
+}
+
+.code-snipet {
+    background-color: transparent;
+    border: 1px solid var(--gray);
+    border-radius: 10px;
+    /* padding: 5px 5px; */
+    color: white;
+
+    margin: 30px 5px;
+}
+
+pre {
+    margin-bottom: 10px;
+}
+
+code.hljs.language-python {
+    background-color: transparent;
+    padding: 0;
+
+    &>span {
+        display: block;
+        padding: 0 20px;
+    }
+}
+
+.code-header {
+    color: var(--gray);
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+
+    &> :first-child {
+        flex-grow: 2;
+
+        &>i {
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            text-align: center;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+    }
+
+    & i.fa-copy {
+        width: 18px;
+        height: 18px;
+        line-height: 18px;
+        text-align: center;
+        font-size: 18px;
+
+        cursor: pointer;
+
+        &:hover {
+            color: white;
+        }
+    }
+}
+
+.hljs {
+    color: white;
+
+    & * {
+        font-weight: normal !important;
+    }
+}
+
+.hljs-title.function_ {
+    color: rgb(230, 230, 170);
+    font-weight: normal;
+}
+
+.hljs-params {
+    color: rgb(124, 220, 254);
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-type {
+    color: rgb(58, 201, 162);
+}
+
+.hljs-number,
+.hljs-string {
+    color: rgb(206, 145, 120);
+}
+
+.hljs-literal,
+.hljs-keyword {
+    color: rgb(86, 156, 214);
+    font-weight: normal;
+}
+
+.hljs-comment {
+    color: rgb(106, 153, 85);
+}
+
+.hljs-subst {
+    color: rgb(202, 202, 202);
+}
+
+.number {
+    padding-right: 30px;
+    color: var(--dark-gray);
+}
+
+.highlighted {
+    background-color: #2d3c2b;
+}
+
+#summary {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 40px 20px 20px;
+
+    width: 16rem;
+    height: 100%;
+    position: fixed;
+
+    & a {
+        color: rgb(170, 170, 170);
+        text-decoration: none;
+    
+        &:visited {
+            color: rgb(170, 170, 170);
+        }
+    }
+}
+
+#content {
+    margin-left: 16rem;
+}

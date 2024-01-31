@@ -1,15 +1,19 @@
 :root {
     --bg-color: rgb(24, 26, 27);
     --nav-color: rgb(36, 39, 41);
+    --gray: rgba(255, 255, 255, 0.5);
+    --dark-gray: rgba(255, 255, 255, 0.3);
 }
 
 body {
     background-color: var(--bg-color);
     color: white;
 }
+
 nav {
     background-color: var(--nav-color) !important;
 }
+
 nav * {
     color: white !important;
 }
@@ -30,36 +34,4 @@ nav * {
 
 .nav-link.active {
     font-weight: bold;
-}
-
-
-code.hljs.language-python {
-    background-color: transparent;
-    border: 1px solid lightgray;
-    border-radius: 15px;
-    padding: 40px 50px;
-    color: white;
-}
-
-.hljs-title.function_ {
-    color: rgb(230, 230, 170);
-    font-weight: normal;
-}
-.hljs-params {
-    color: rgb(124, 220, 254);
-}
-.hljs-built_in, .hljs-title.class_ {
-    color: rgb(58, 201, 162);
-}
-.hljs-number, .hljs-string {
-    color: rgb(206, 145, 120);
-}
-.hljs-literal, .hljs-keyword {
-    color: rgb(86, 156, 214);
-}
-.hljs-comment {
-    color: rgb(106, 153, 85);
-}
-.hljs-subst {
-    color: rgb(202, 202, 202);
 }
