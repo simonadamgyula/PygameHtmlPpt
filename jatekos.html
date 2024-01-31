@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<title>Sablon</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+
+<script src="https://kit.fontawesome.com/daa386bf97.js" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/code.css">
+
+<script src="./js/highlighting.js"></script>
+    <title>Játékos a pályán</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg"></nav>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex mt-3" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="_container">
+        <div id="summary">
+            <h5>Ezen az oldalon</h5>
+            <a href="#kezdet">Kezdet</a>
+            <a href="#kozep">Közép</a>
+            <a href="#vég">Vég</a>
+        </div>
+        <div id="content">
+            <h1 id="kezdet">Bevezetés</h1>
+            <p></p>
+            <code  file="view.py">from multiprocessing.managers import BaseManager
+import profile
+from typing import Any, Dict, Tuple
+from unicodedata import name
+from django.shortcuts import render
+from django.views import generic
+from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from user.models import Profile, _order_
+from . import models as ml
+from django import http
+
+
+class ItemList(generic.ListView):
+    template_name: str = "list.html"
+    def get_queryset(self):
+        return None
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context: Dict = {}
+        p: Profile = Profile.objects.get(user=self.request.user)+*+
+        context["profile"] = p
+        items = ml.Item.objects.all()
+        context["items"] = items
+        return context</code>
+            <h2 id="kozep">Közép</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis doloremque architecto itaque sunt veritatis ipsa nesciunt facere quisquam quidem culpa, voluptatem, soluta dolorum, voluptatum unde reiciendis vel saepe dolor repellendus.
+            Quam suscipit est perspiciatis, aspernatur fuga quod debitis necessitatibus architecto ut similique, qui nobis consequuntur. Atque corrupti voluptas, quia vitae rerum, eveniet impedit quas voluptatibus magni obcaecati maxime saepe libero?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro aliquid ut quidem cupiditate, perspiciatis molestias saepe harum quos libero est autem quis hic amet commodi non. Fuga porro tempora cumque.</p>
+            <img src="https://cdn.nwmgroups.hu/s/img/i/1408/20140807foto-szelfie-makako-majom-fenykep.jpg?w=800&h=1106&t=5" height="300" alt="">
+            <h1 id="vég">Vég</h1>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea aliquid natus illo sint, animi voluptates hic quibusdam consequuntur delectus maiores veritatis error at tenetur impedit sed assumenda necessitatibus provident ullam.
+            Sed unde reiciendis et minus dignissimos, ratione veritatis vero? Quae incidunt, dolore tempora pariatur iste molestias est neque deserunt perferendis, cupiditate dignissimos aut quam modi velit maxime, quis odit obcaecati.
+            Impedit minus doloribus, aut molestiae obcaecati similique quos vel dolor, sit, eaque assumenda. Id exercitationem necessitatibus eligendi. Labore minus obcaecati beatae dignissimos facere. Modi, pariatur inventore consequatur asperiores omnis quo?
+            Cumque aliquid est nam at eaque aperiam recusandae ipsum excepturi quas, illo ducimus, culpa quidem id sint minima blanditiis itaque facilis nihil et atque. Corporis, harum error. Ex, reprehenderit optio!
+            Omnis aliquid sequi consequuntur nihil, molestias fugit aspernatur aliquam. Neque officia voluptates tempore placeat, dolorem expedita provident. Sapiente, doloremque vitae doloribus natus earum ipsa temporibus laudantium debitis soluta dolorum aut!
+            Sint dolor tempora quod harum omnis quidem quisquam debitis modi. Consequuntur, ad iure reprehenderit esse, qui cumque debitis reiciendis voluptates soluta vitae fuga alias tempora eaque facilis modi dicta quia!</p>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis quod, quisquam autem ad ratione itaque hic assumenda modi dolorem necessitatibus eaque at consectetur alias error, enim nobis iure impedit saepe.
+            Debitis iure aperiam dolores mollitia voluptatibus eligendi nulla voluptas quisquam et voluptates veniam ullam minus est provident fugiat non laboriosam incidunt quam, qui accusantium tempora, cupiditate in ex nemo. Nobis?</p>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+        $(".navbar").load("nav.html");
+    </script>
+</body>
+</html>
