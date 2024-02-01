@@ -26,7 +26,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg sticky-top"></nav>
+    <nav class="sticky-top navbar navbar-dark bg-dark navbar-tertiary"></nav>
 
     <div class="_container">
         <div id="summary">
@@ -44,7 +44,7 @@
             <p>Cél: amikor a játékos eléri a pálya szélét, nem engedjük a játékost tovább, hanem helyette a csempéket
                 fogjuk mozgatni. Ez azt a hatást kelti, hogy a játékos továbbra is abba az irányba halad.</p>
             <div class="text-center">
-                <img src="img/scroll fejezet képei/eleje_eleje.gif" class="mx-auto d-block img_border" alt="scroll gif">
+                <img src="img/scroll fejezet képei/eleje_eleje.gif" class="mx-auto d-block img_border img-fluid" alt="scroll gif">
                 <p class="text_border">Jelenlegi állapot: a játékos nem tud a képernyőn kívüli pályarészekre eljutni
                 </p>
             </div>
@@ -169,19 +169,21 @@
                 pygame bejárja az összes csempe objectumot és mindegyiken meghívja az update metódust</p>
             <h1 id="befejezés">Befejezés</h1>
             <div class="text-center">
-                <img src="img/scroll fejezet képei/vége_eleje.gif" class="mx-auto d-block img_border" alt="scroll gif">
+                <img src="img/scroll fejezet képei/vége_eleje.gif" class="mx-auto d-block img_border img-fluid" alt="scroll gif">
                 <p class="text_border">Végeredmény: a játékos be tudja járni a pálya teljes szélességét bal és</p>
             </div>
             <div class="text-center">
                 <p id="text_border">jobb irányban is</p>
-                <img src="img/scroll fejezet képei/vége_közepe.gif" class="mx-auto d-block" id="img_border"
+                <img src="img/scroll fejezet képei/vége_közepe.gif" class="mx-auto d-block img-fluid" id="img_border"
                     alt="scroll gif">
             </div>
         </div>
     </div>
 
     <script>
-        $(".navbar").load("nav.html");
+        $(".navbar").load("nav.html", () => {
+            $("#nav-summary").html($("#summary").html());
+        });
     </script>
 </body>
 
