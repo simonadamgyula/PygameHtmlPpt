@@ -49,7 +49,7 @@ level fájl
      self.setup_level(level_data)  <- később hozzuk létrehoz
    - setup_level metódus (self, layout (a volt level_data))
     bejárjuk a listát és létrehozzuk a megfelelő csempét a benne lévő karaktert használva
-      kkiszámoljuk az pozíciójáta col_index, row_index és a tile_size segítségével
+      kiszámoljuk az pozíciójáta col_index, row_index és a tile_size segítségével
       ha a tile_type nem szóköz:
         létrehozunk egy új TerrainTile-t (size = tile_size, x, y, tile_type)
         a csempét hozzáadjuk a self.terrain_tiles grouphoz (self.terrain_tile.add(tile))
