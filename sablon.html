@@ -23,11 +23,17 @@
     <script src="./js/highlighting.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-dark navbar-tertiary"></nav>
+    <nav class="sticky-top navbar navbar-dark bg-dark navbar-tertiary"></nav>
     
     <div class="_container">
         <div id="summary">
             <h5>Ezen az oldalon</h5>
+            <a href="#kezdet">Kezdet</a>
+            <a href="#kozep">Közép</a>
+            <a href="#vég">Vég</a>
+            <a href="#kezdet">Kezdet</a>
+            <a href="#kozep">Közép</a>
+            <a href="#vég">Vég</a>
             <a href="#kezdet">Kezdet</a>
             <a href="#kozep">Közép</a>
             <a href="#vég">Vég</a>
@@ -80,7 +86,9 @@ class ItemList(generic.ListView):
     </div>
 
     <script>
-        $(".navbar").load("nav.html");
+        $(".navbar").load("nav.html", () => {
+            $("#nav-summary").html($("#summary").html());
+        });
     </script>
 </body>
 </html>

@@ -39,6 +39,29 @@ code.hljs.language-python {
     }
 }
 
+.offcanvas-body {
+    display: flex;
+    flex-direction: column;
+
+    & #nav-summary {
+        flex-grow: 1;
+        display: none;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-bottom: 20px;
+
+        & a {
+            padding: 2px 0;
+            text-decoration: none;
+            color: rgb(170, 170, 170) !important;
+
+            &:hover {
+                color: rgb(210, 210, 210) !important;
+            }
+        }
+    }
+}
+
 .code-header {
     color: var(--gray);
     display: flex;
@@ -146,4 +169,17 @@ code.hljs.language-python {
 
 #content {
     margin-left: 16rem;
+    margin-right: 20px;
+}
+
+@media screen and (max-width: 850px) {
+    #summary {
+        display: none;
+    }
+    #nav-summary {
+        display: flex !important;
+    }
+    #content {
+        margin-left: 20px;
+    }
 }
