@@ -44,8 +44,9 @@
             <p>Cél: amikor a játékos eléri a pálya szélét, nem engedjük a játékost tovább, hanem helyette a csempéket
                 fogjuk mozgatni. Ez azt a hatást kelti, hogy a játékos továbbra is abba az irányba halad.</p>
             <div class="text-center">
-                <img src="img/scroll fejezet képei/eleje_eleje.gif" class="mx-auto d-block img_border" alt="scroll gif" >
-                <p class="text_border">Jelenlegi állapot: a játékos nem tud a képernyőn kívüli pályarészekre eljutni </p>
+                <img src="img/scroll fejezet képei/eleje_eleje.gif" class="mx-auto d-block img_border" alt="scroll gif">
+                <p class="text_border">Jelenlegi állapot: a játékos nem tud a képernyőn kívüli pályarészekre eljutni
+                </p>
             </div>
 
             <h1 id="level">Level class fejlesztése</h1>
@@ -58,7 +59,8 @@
         self.setup_level(level_data)
             </code>
             <p>world_shift változó: a pálya mozgásának értéke lesz.</p>
-            <p>Alapértéke az nulla, hiszen amikor a játékos a képernyő közepső sávjában áll, akkor a játékos maga mozog, a csempe mozdulatlan.</p>
+            <p>Alapértéke az nulla, hiszen amikor a játékos a képernyő közepső sávjában áll, akkor a játékos maga mozog,
+                a csempe mozdulatlan.</p>
             <code file="level.py">class Level:
     ...
     def scroll_x(self):
@@ -70,11 +72,13 @@
                 Létrehozott egy új, scrollozásért felelős metódust, amit scroll_x-nek nevez.
             </p>
             <p>
-                <ul>3 globális változóra hivatkozik locálisan, hogy egyszerűbb legyen megírnia  a kódót:
+            <div>3 globális változóra hivatkozik locálisan, hogy egyszerűbb legyen megírnia a kódót:
+                <ul>
                     <li>player: magának a player változó tartalmát éri elj</li>
                     <li>player_x: a játékoshoz tartozó rect objectumnak a centerx értékére hivatkozik</li>
                     <li>direction_x: a player-hez tartozó direction attribútumnak az x összetevője</li>
                 </ul>
+            </div>
             </p>
             <code file="level.py">class Level:
     ...
@@ -87,8 +91,11 @@
                 self.world_shift = 8+*+
                 player.speed = 0+*+
                         </code>
-            <p>Ha a játékos eléri a képernyő bal oldalának egynegyedét és továbbra is balra szeretne menni, a world_shift értékét 8-ra állítja, azaz a képernyő jobbra fog mozdulni 8 pixel sebességgel és a player.speed változót 0-ra rakja, hogy a játékos ne mozduljon.</p>
-            <p>Ezzel azt fogja elérni, hogy ha a játékos megközelíti a pálya bal egynegyedét, akkor megállítja a játékost és helyette a csempéket mozdítja.</p>
+            <p>Ha a játékos eléri a képernyő bal oldalának egynegyedét és továbbra is balra szeretne menni, a
+                world_shift értékét 8-ra állítja, azaz a képernyő jobbra fog mozdulni 8 pixel sebességgel és a
+                player.speed változót 0-ra rakja, hogy a játékos ne mozduljon.</p>
+            <p>Ezzel azt fogja elérni, hogy ha a játékos megközelíti a pálya bal egynegyedét, akkor megállítja a
+                játékost és helyette a csempéket mozdítja.</p>
             <code file="level.py">class Level:
     ...
     def scroll_x(self):
@@ -103,7 +110,8 @@
             self.world_shift = -8+*+
             player.speed = 0+*+
             </code>
-            <p>Meg kell csinálni ugyan ezt a másik oldallal is, de nyílván az értékeket át kell írni, hogy jobb oldalon működjön.</p>
+            <p>Meg kell csinálni ugyan ezt a másik oldallal is, de nyílván az értékeket át kell írni, hogy jobb oldalon
+                működjön.</p>
             <code file="level.py">class Level:
     ...
     def scroll_x(self):
@@ -121,7 +129,8 @@
                 self.world_shift = 0+*+
                 player.speed = 8+*+
             </code>
-            <p>Végül egy else ágat is létrehoz: leállítja a képernyő mozgását és beállítja a player_speed változót 8-ra, hogy újra a játékos mozogjon.</p>
+            <p>Végül egy else ágat is létrehoz: leállítja a képernyő mozgását és beállítja a player_speed változót 8-ra,
+                hogy újra a játékos mozogjon.</p>
             <code file="level.py">class Level:
     ...
     def run(self):
@@ -140,7 +149,9 @@
         self.rect.x += shift+*+
             </code>
             <p>Shift jelzi majd, hogy mennyivel kell eltolnunk a csempéket és milyen irányban.</p>
-            <p>A self.rect.x += shift-el pedig meghívja a csempékre vonatkozó rect objectumnak az x összetevőjét, az összes olyan csempeosztály, mely ennek a csempeosztálynak(Tile class) a leszármazottja rendelkezni fog ezzel a képességgel.</p>
+            <p>A self.rect.x += shift-el pedig meghívja a csempékre vonatkozó rect objectumnak az x összetevőjét, az
+                összes olyan csempeosztály, mely ennek a csempeosztálynak(Tile class) a leszármazottja rendelkezni fog
+                ezzel a képességgel.</p>
             <code file="level.py">class Level:
     ...
     def run(self):
@@ -152,16 +163,19 @@
         self.scroll_x()
         self.player.draw(self.display_surface)        
             </code>
-            <p>Meg kell hívni az update eljárást. Self.terrain_tiles.update(self.world_shift): a zárójelben az eltolás mértékét adta meg</p>
-            <p>Nem szükséges nekünk minden egyes csempét bejárnunk, mivel a pygame ezt megcsinálja helyettünk, így a pygame bejárja az összes csempe objectumot és mindegyiken meghívja az update metódust</p>
+            <p>Meg kell hívni az update eljárást. Self.terrain_tiles.update(self.world_shift): a zárójelben az eltolás
+                mértékét adta meg</p>
+            <p>Nem szükséges nekünk minden egyes csempét bejárnunk, mivel a pygame ezt megcsinálja helyettünk, így a
+                pygame bejárja az összes csempe objectumot és mindegyiken meghívja az update metódust</p>
             <h1 id="befejezés">Befejezés</h1>
             <div class="text-center">
-                <img src="img/scroll fejezet képei/vége_eleje.gif" class="mx-auto d-block img_border" alt="scroll gif" >
+                <img src="img/scroll fejezet képei/vége_eleje.gif" class="mx-auto d-block img_border" alt="scroll gif">
                 <p class="text_border">Végeredmény: a játékos be tudja járni a pálya teljes szélességét bal és</p>
             </div>
             <div class="text-center">
                 <p id="text_border">jobb irányban is</p>
-                <img src="img/scroll fejezet képei/vége_közepe.gif" class="mx-auto d-block" id="img_border" alt="scroll gif" >
+                <img src="img/scroll fejezet képei/vége_közepe.gif" class="mx-auto d-block" id="img_border"
+                    alt="scroll gif">
             </div>
         </div>
     </div>

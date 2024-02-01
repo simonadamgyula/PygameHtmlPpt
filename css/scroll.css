@@ -3,22 +3,26 @@
 }
 
 .img_border {
-    border: 5px solid   var(--border-color);
+    border: 5px solid var(--border-color);
     border-bottom: 0px;
 }
+
 .text_border {
     border: 5px solid var(--border-color);
     border-top: 0px;
     max-width: 760px;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 #img_border {
-    border: 5px solid   var(--border-color);
+    border: 5px solid var(--border-color);
     border-top: 0px;
 
 }
+
 #text_border {
     border: 5px solid var(--border-color);
     border-bottom: 0px;
@@ -26,4 +30,6 @@
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
