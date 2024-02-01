@@ -77,45 +77,70 @@
         </div>
         <div id="content">
             <h1 id="kezdet">Bevezetés</h1>
-            <p></p>
-            <code  file="view.py">from multiprocessing.managers import BaseManager
-import profile
-from typing import Any, Dict, Tuple
-from unicodedata import name
-from django.shortcuts import render
-from django.views import generic
-from django.contrib.auth.models import User
-from django.contrib.auth.mixins import LoginRequiredMixin
-from user.models import Profile, _order_
-from . import models as ml
-from django import http
+            <p>Ebben a fejezetben a játékos létrehozásáról és a mozgásáról lesz szó.</p> <br>
+            <p>A cél: Játékos akadálytalan mozgása és a játékos ütközéseinek létrehozása.</p>
+            <img src="img/játékos a pályán képei/sok_ugrálás.gif" alt="gif">
+
+            <h1>Közép</h1> <br>
+            <h2>Level class</h2>
+            <code>def __init__(self, level_data, surface):
+                ...
+                self.player = pygame.sprite.GroupSingle()+*+
+                def setup_level(self, layout)
+                for row_index, row in enumerate(layout):
+                for col_index, tile_type in enumerate(row):
+                ...
+                tile_type == 'P'+*+
+                player_sprite = Player((x, y))+*+
+                self.player.add(player_sprite)+*+</code>
+            <p>A self.player = pygame.sprite.GroupSingle() létrehoz egy tárolót. A tile_type == 'P' a pályán felismeri a játékost,player_sprite = Player((x, y)) legyártja a karaktert,self.player.add(player_sprite) hozzáadja a sprite objektumhoz a karaktert.</p>
+            
+            <h2 id="kozep">Player class</h2> <br>
+            <h4>Elhelyezkedés a pályán</h4>
+            A player classban a játékos mozgását, a gravitációt és az ütközéseket hozzuk létre.
+            <code  file="view.py">def __init__(self, pos)
+super.__init__()</code>
+            <p>def __init__(self, pos) metódus átveszi a x és y koordináták értékét. A super.__init__() az ős osztály inicializáló metódusát hívja.</p>
+            <code>self.image = pygame.image.load('../img/player/Idle__000.png').convert_alpha()
+self.rect = self.image.get_rect(topleft=pos)
+self.direction = pygame.math.Vector2(0, 0)</code>
+            <p>self.image = pygame.image.load('../img/player/Idle__000.png').convert_alpha()   self.rect = self.image.get_rect(topleft=pos): String formátumban megadja a fájlnak az elérési útvonalát. self.direction = pygame.math.Vector2(0, 0): A mozgást vektor formában adja meg, az első érték gondoskodik az x irányú, a másik gondoskodik az y irányú elmozdulásról.</p>
+            <h4>Játékfizika</h4>
+            <code>self.speed
+self. gravity
+self.jump_speed
+self.on_ground</code>
+            <p>self.speed: játékos gyorsaságának meghatározása, self. gravity: A gravitáció erősségét határozza meg, self.jump_speed: Az ugrás sebességét adja meg, self.on_ground: Az elrugaszkodás csak akkor történhet meg ha a karakter a felszínen áll</p>
+            <h4>Mozgás figyelése</h4>
+<code>def get_input(self):
+keys = pygame.key.get_pressed()
+</code>
+            <p>def get_input(self): Figyeli a billentyűzet felől érkező információkat. pygame.keys.get:pressed(): Eltárolja a billentyűzet felől érkező információkat</p>
+<code>def get_input(self):
+keys = pygame.key.get_pressed()
+
+if keys[pygame.K_RIGHT]:+*+
+    self.direction.x= 1+*+
+elif keys(pygame.K_LEFT):+*+
+    self.direction.x = -1+*+
+else:
+    self.direction.x = 0</code>
+
+<code></code>
 
 
-class ItemList(generic.ListView):
-    template_name: str = "list.html"
-    def get_queryset(self):
-        return None
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        context: Dict = {}
-        p: Profile = Profile.objects.get(user=self.request.user)+*+
-        context["profile"] = p
-        items = ml.Item.objects.all()
-        context["items"] = items
-        return context</code>
-            <h2 id="kozep">Közép</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis doloremque architecto itaque sunt veritatis ipsa nesciunt facere quisquam quidem culpa, voluptatem, soluta dolorum, voluptatum unde reiciendis vel saepe dolor repellendus.
-            Quam suscipit est perspiciatis, aspernatur fuga quod debitis necessitatibus architecto ut similique, qui nobis consequuntur. Atque corrupti voluptas, quia vitae rerum, eveniet impedit quas voluptatibus magni obcaecati maxime saepe libero?</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro aliquid ut quidem cupiditate, perspiciatis molestias saepe harum quos libero est autem quis hic amet commodi non. Fuga porro tempora cumque.</p>
-            <img src="https://cdn.nwmgroups.hu/s/img/i/1408/20140807foto-szelfie-makako-majom-fenykep.jpg?w=800&h=1106&t=5" height="300" alt="">
+
+
+
+
+    <img src="img/játékos a pályán képei/ugrás_kis_mozgás.gif" alt="">
+            <p>if keys[pygame.K_RIGHT]:self.direction.x= 1   Ha a jobb nyíl lenyomásra kerül, akkor az x tengelyen halad ebben az esetben jobbra 1-et. Az elif ág a bal oldali mozgást definiálja. else: self.direction.x = 0 azt jelenti, ha a játékos nem nyomja le egyik billentyűt se akkor ne mozogjon a karakter.</p>
             <h1 id="vég">Vég</h1>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea aliquid natus illo sint, animi voluptates hic quibusdam consequuntur delectus maiores veritatis error at tenetur impedit sed assumenda necessitatibus provident ullam.
-            Sed unde reiciendis et minus dignissimos, ratione veritatis vero? Quae incidunt, dolore tempora pariatur iste molestias est neque deserunt perferendis, cupiditate dignissimos aut quam modi velit maxime, quis odit obcaecati.
-            Impedit minus doloribus, aut molestiae obcaecati similique quos vel dolor, sit, eaque assumenda. Id exercitationem necessitatibus eligendi. Labore minus obcaecati beatae dignissimos facere. Modi, pariatur inventore consequatur asperiores omnis quo?
-            Cumque aliquid est nam at eaque aperiam recusandae ipsum excepturi quas, illo ducimus, culpa quidem id sint minima blanditiis itaque facilis nihil et atque. Corporis, harum error. Ex, reprehenderit optio!
-            Omnis aliquid sequi consequuntur nihil, molestias fugit aspernatur aliquam. Neque officia voluptates tempore placeat, dolorem expedita provident. Sapiente, doloremque vitae doloribus natus earum ipsa temporibus laudantium debitis soluta dolorum aut!
-            Sint dolor tempora quod harum omnis quidem quisquam debitis modi. Consequuntur, ad iure reprehenderit esse, qui cumque debitis reiciendis voluptates soluta vitae fuga alias tempora eaque facilis modi dicta quia!</p>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Corporis quod, quisquam autem ad ratione itaque hic assumenda modi dolorem necessitatibus eaque at consectetur alias error, enim nobis iure impedit saepe.
-            Debitis iure aperiam dolores mollitia voluptatibus eligendi nulla voluptas quisquam et voluptates veniam ullam minus est provident fugiat non laboriosam incidunt quam, qui accusantium tempora, cupiditate in ex nemo. Nobis?</p>
+
+
+
+
+        
         </div>
     </div>
 
