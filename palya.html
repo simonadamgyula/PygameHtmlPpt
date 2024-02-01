@@ -19,6 +19,7 @@
 
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/code.css">
+    <link rel="stylesheet" href="./css/palya.css">
 
     <script src="./js/highlighting.js"></script>
 </head>
@@ -58,6 +59,7 @@ clock = pygame.time.Clock()</code>
             <code file="main.py">...
 bg_surf = pygame.image.load("../img/BG.png").convert_alpha()
 bg_rect = bg_surf.get_recct(bottomleft=(0, screen_height))</code>
+            <div><img src="./img/palyaletrehozasa/background.png" class="mx-auto d-block img_border img-fluid" alt="háttér"></div>
             <h2>Játékciklus</h2>
             <p>Készítsünk el egy játékciklust és benne egy eseményciklust.</p>
             <code file="main.py">...
@@ -104,6 +106,75 @@ class Tile(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.Surface((size, size))
         self.rect = self.image.get_rect(topleft=(x, y))</code>
+            
+        <h2>TerrainTile osztály</h2>
+        <p>Ez az osztály a Tile osztály leszármazottja lesz és csempe információi mallett a hozzá tartozó képet is fogja tárolni.</p>
+        <code file="tiles.py">...
+
+class TerrainTile(Tile):
+    def __init__(self, size, x, y, terrain_type):
+        super().__init__(size, x, y)
+        self.image = pygame.image.load(f"../img/terrain/${terrain_type}.png").convert_alpha()</code>
+        <p>Az osztály konstruktorában meghívjuk az ősének a konstruktorát a kellő értékekkel. Azon kívül betöltjük a terep típusnak megfelelő képet.</p>
+
+        <h2>Terep létrehozása (Level osztály)</h2>
+        <p>Hozzunk létre egy új osztályt, ami a csempéket tárolja.</p>
+        <code file="level.py">import pygame
+            
+class Level:
+    def __init__(self, level_data, surface):
+        self.display_surface = surface
+        self.terrain_tiles = pygame.sprite.Group()</code>
+        <p>Az osztálynak kell a pálya információja (level_data) és az elsődleges réteg (surface). Létrehozunk egy sprite group változót (terrain_tiles), ami a pályán lévő összes csempét fogja tárolni.</p>
+        <code file="level.py">import pygame
+from settings import tile_size+*+
+from tiles import TerrainTile+*+
+
+class Level:
+    def __init__(self, level_data, surface):
+        ...
+        self.setup_level(level_data)+*+
+
+    def setup_level(self, layout):+*+
+        for row_index, row in enumerate(layout):+*+
+            for col_index, tile_type in enumerate(row):+*+
+                x = col_index * tile_size+*+
+                y = row_index * tile_size+*+
+
+                if tile_type != " ":+*+
+                    tile = TerrainTile(tile_size, x, y, tile_type)+*+
+                    self.terrain_tiles.add(tile)+*+</code>
+        <p>Hozzunk létre egy setup_level metódust, ez fogja létrehozni a pályánk csempéit. Végigjárja a kapott pálya adatokat (level_data) és kiszámolja a koordinátát, az indexek és a csempeméret alapján. Ha az a pozíció nem üres, akkor létrehoz egy csempét a szükséges típussal, és hozzáadja a sprite grouphoz (terrain_tiles)</p>
+        <p>Hívjuk meg ezt a metódust a konstruktorban a kapott pálya adatokkal (level_data)</p>
+        <code file="level.py">...
+
+class Level:
+    ...
+
+    def run(self):
+        self.terrain_tiles.draw(self.display_surface)</code>
+        <p>A run metódus fogja kirajzolni a csempéket, a sprite group draw metódusának meghívásával.</p>
+        <h2>Utolsó teendők</h2>
+        <p>Márcsak annyi van hátra, hogy létrehozzuk a Level osztálynak egy példányát, és hogy meghívjuk a run metódusát minden játékciklusban.</p>
+        <code file="main.py">...
+from settings import screen_width, screen_height, level_map+*+
+from level import Level+*+
+
+...
+level = Level(level_map, screen)+*+
+...
+
+while running:
+    ...
+    screen.blit(bg_surf, bg_rect)
+    level.run()+*+
+    ...
+        </code>
+        <h1>Lezárás</h1>
+        <p>A képernyőn most már megjelenik a háttér, és a beállított level_map alapján a terep is.</p>
+        <div class="text-center">
+            <img src="./img/palyaletrehozasa/terrain.png" class="mx-auto d-block img_border img-fluid" alt="terep">
+        </div>
         </div>
     </div>
 
