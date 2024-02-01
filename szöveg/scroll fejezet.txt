@@ -18,7 +18,7 @@ Level class:
             a world shift értéke -8, hogy a képernyő balra haladjon
             és a player speed szintén nulla, mert a játékos itt se mozdulhat
         8.52: végül egy else ágat is létrehoz: leállítja a képernyő mozgását és beállítja a player_speed változót 8-ra, hogy újra a játékos mozogjon
-    10.00: a def run metódust kiegészíti és meghívja a scroll_x metódust, hogy fusson
+    10.00: a run metódust kiegészíti és meghívja a scroll_x metódust, hogy fusson
     így még a csempék nem mozdulnak, csak a játékost állítja meg
 
 Tile class:
