@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Sablon</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/daa386bf97.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/code.css">
+
+    <script src="./js/highlighting.js"></script>
+</head>
+<body>
+    <nav class="sticky-top navbar navbar-dark bg-dark navbar-tertiary"></nav>
+    
+    <div class="_container">
+        <div id="summary">
+            <h5>Ezen az oldalon</h5>
+            <a href="#kezdet">Kezdet</a>
+            <a href="#kozep">Közép</a>
+            <a href="#vég">Vég</a>
+        </div>
+        <div id="content">
+            <h1>Bevetetés</h1>
+            <p>Ebben a részben egy alap 2D platformer játék pályáját fogjuk elkészíteni.</p>
+            <h2>Pygame inicializálása</h1>
+            <code file="main.py">import pygame
+
+pygame.init()
+screen = pygame.display.set_mode((600, 300))
+clock = pygame.time.Clock()</code>
+            <p>Először is importáljuk be a pygame modult. Majd inicializájuk azt, és hozzuk létre a elsődleges réteget (screen) és egy óra (clock) változót.</p>
+            <h2>Beállítások</h2>
+            <p>A beallításokat mentsük egy külön fájlba, hogy több helyről is elérhető legyen.</p>
+            <code file="settings.py">screen_width = 1200
+screen_height = 700</code>
+            <p>A beállításokba mentsüka a képernyő magasságát (screen_height) és szélességét (screen_width). Használjuk a beállításainkat a képernyő méretének meghatározására.</p>
+            <code file="main.py">import pygame
+from settings import screen_width, screen_height+*+
+
+pygame.init()
+screen = pygame.display.set_mode((screen_width, screen_height))+*+
+clock = pygame.time.Clock()</code>
+            <h2>Háttér</h2>
+            <p>Használjuk a img mappában lévő háttérképet a háttér létrehozásához.</p>
+            <code file="main.py">...
+bg_surf = pygame.image.load("../img/BG.png").convert_alpha()
+bg_rect = bg_surf.get_recct(bottomleft=(0, screen_height))</code>
+            <h2>Játékciklus</h2>
+            <p>Készítsünk el egy játékciklust és benne egy eseményciklust.</p>
+            <code file="main.py">...
+running = True
+white running:
+    for event in pygame.events.get():
+        if event.type == pygame.QUIT:
+            running = False
+    
+    pygame.blit(bg_surf, bg_rect)
+
+    pygame.display.update()
+    clock.tick(60)
+
+pygame.quit()</code>
+            <p>A ciklusban megjelenítjük a háttérképet, frissítjük a kijelzőt és beállítjuk az FPS-t.</p>
+
+            <h1>Pálya létrehozása</h1>
+            <p>A pályát egy 2D-s listából kiolvasva hozzuk létre.</p>
+            <p>A beállításokban rögzítjük a pályát. A lista minden eleme egy sor a pályán, minden karakter a szövegben egy csempe a sorban. Rögzítjük még a csempék méretét (tile_site). A játéktér magasságát a csempék méretéből számoljuk ki.</p>
+            <code file="settings.py">level_map = [+*+
+    '                            ',+*+
+    '                            ',+*+
+    '                            ',+*+
+    '          np                ',+*+
+    '                            ',+*+
+    '     noop                   ',+*+
+    '                            ',+*+
+    'op           noop           ',+*+
+    '                            ',+*+
+    'bbbbbbc    abbc   ac  abc   ',+*+
+    'eeeeeef   aheejc  df  dejc  ']+*+
+
+tile_size = 64+*+
+
+screen_width = 1200
+screen_height = len(level_map) * tile_size+*+</code>
+            <h2>Tile osztály</h2>
+            <p>Ez az osztály az egyes csempék információit fogja tárolni.</p>
+            <code file="tiles.py">import pygame
+
+class Tile(pygame.sprite.Sprite):
+    def __init__(self, size, x, y):
+        super().__init__()
+        self.image = pygame.Surface((size, size))
+        self.rect = self.image.get_rect(topleft=(x, y))</code>
+        </div>
+    </div>
+
+    <script>
+        $(".navbar").load("nav.html", () => {
+            $("#nav-summary").html($("#summary").html());
+        });
+    </script>
+</body>
+</html>
