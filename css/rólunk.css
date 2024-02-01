@@ -1,0 +1,22 @@
+:root{
+    --bg-color: rgb(24, 26, 27);
+}
+
+.card-body{
+    background-color: #de8b06df;
+}
+
+.card{
+    background-color: var(--bg-color);
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
