@@ -32,10 +32,55 @@ pre {
 code.hljs.language-python {
     background-color: transparent;
     padding: 0;
+    display: grid;
 
     &>span {
         display: block;
-        padding: 0 20px;
+        position: relative;
+        padding-right: 1rem;
+
+        &:before {
+            content: attr(data-line-number);
+            text-align: right;
+            width: 2rem;
+            display: inline-block;
+            margin-right: 1.5rem;
+            padding-left: 0;
+            color: var(--dark-gray);
+        }
+
+        &.highlighted:after {
+            content: " ";
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgb(144 232 141);
+            opacity: .2;
+            width: 100%;
+        }
+    }
+}
+
+.offcanvas-body {
+    display: flex;
+    flex-direction: column;
+
+    & #nav-summary {
+        flex-grow: 1;
+        display: none;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-bottom: 20px;
+
+        & a {
+            padding: 2px 0;
+            text-decoration: none;
+            color: rgb(170, 170, 170) !important;
+
+            &:hover {
+                color: rgb(210, 210, 210) !important;
+            }
+        }
     }
 }
 
@@ -115,14 +160,7 @@ code.hljs.language-python {
     color: rgb(202, 202, 202);
 }
 
-.number {
-    padding-right: 30px;
-    color: var(--dark-gray);
-}
 
-.highlighted {
-    background-color: #2d3c2b;
-}
 
 #summary {
     display: flex;
@@ -137,7 +175,8 @@ code.hljs.language-python {
     & a {
         color: rgb(170, 170, 170);
         text-decoration: none;
-    
+        padding: 2.5px 0;
+
         &:visited {
             color: rgb(170, 170, 170);
         }
@@ -146,4 +185,19 @@ code.hljs.language-python {
 
 #content {
     margin-left: 16rem;
+    margin-right: 20px;
+}
+
+@media screen and (max-width: 850px) {
+    #summary {
+        display: none;
+    }
+
+    #nav-summary {
+        display: flex !important;
+    }
+
+    #content {
+        margin-left: 20px;
+    }
 }

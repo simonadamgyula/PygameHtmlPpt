@@ -26,12 +26,15 @@ nav * {
 
 .navbar-toggler {
     border-color: white;
-
-    & span {
-        filter: invert();
-    }
 }
 
 .nav-link.active {
     font-weight: bold;
+}
+
+.offcanvas-header {
+    background-color: rgb(33, 37, 41);
+}
+.btn-close {
+    filter: invert();
 }
