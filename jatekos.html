@@ -26,55 +26,19 @@
     <title>Játékos a pályán</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg"></nav>
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="d-flex mt-3" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-        </div>
-    </div>
+    <nav class="sticky-top navbar navbar-dark bg-dark navbar-tertiary"></nav>
 
     <div class="_container">
         <div id="summary">
             <h5>Ezen az oldalon</h5>
-            <a href="#kezdet">Kezdet</a>
-            <a href="#kozep">Közép</a>
-            <a href="#vég">Vég</a>
+            <a href="#kezdet">Bevezetés</a>
+            <a href="#level class">Level class</a>
+            <a href="#player class">Player class</a>
+            <a href="#elhelyezkedés">Elhelyezkedés a pályán</a>
+            <a href="#játékfizika">Játékfizika</a>
+            <a href="#mozgás">Mozgás figyelése</a>
+            <a href="#ütközések">Ütközések</a>
+            <a href="#összegzés">Összegzés</a>
         </div>
         <div id="content">
             <h1 id="kezdet">Bevezetés</h1>
@@ -82,8 +46,8 @@
             <p>A cél: Játékos akadálytalan mozgása és a játékos ütközéseinek létrehozása.</p>
             <img src="img/játékos a pályán képei/sok_ugrálás.gif" alt="gif" class="mx-auto d-block img_border img-fluid">
 
-            <h1>Közép</h1> <br>
-            <h2>Level class</h2>
+            <h1>Kód és magyarázat</h1> <br>
+            <h2 id="level class">Level class</h2>
             <code>def __init__(self, level_data, surface):
                 ...
                 self.player = pygame.sprite.GroupSingle()+*+
@@ -96,8 +60,8 @@
                 self.player.add(player_sprite)+*+</code>
             <p>A self.player = pygame.sprite.GroupSingle() létrehoz egy tárolót. A tile_type == 'P' a pályán felismeri a játékost,player_sprite = Player((x, y)) legyártja a karaktert,self.player.add(player_sprite) hozzáadja a sprite objektumhoz a karaktert.</p>
             
-            <h2 id="kozep">Player class</h2> <br>
-            <h4>Elhelyezkedés a pályán</h4>
+            <h2 id="player class">Player class</h2> <br>
+            <h4 id="elhelyezkedés">Elhelyezkedés a pályán</h4>
             A player classban a játékos mozgását, a gravitációt és az ütközéseket hozzuk létre.
             <code  file="view.py">def __init__(self, pos)
 super.__init__()</code>
@@ -106,13 +70,13 @@ super.__init__()</code>
 self.rect = self.image.get_rect(topleft=pos)
 self.direction = pygame.math.Vector2(0, 0)</code>
             <p>self.image = pygame.image.load('../img/player/Idle__000.png').convert_alpha()   self.rect = self.image.get_rect(topleft=pos): String formátumban megadja a fájlnak az elérési útvonalát. self.direction = pygame.math.Vector2(0, 0): A mozgást vektor formában adja meg, az első érték gondoskodik az x irányú, a másik gondoskodik az y irányú elmozdulásról.</p>
-            <h4>Játékfizika</h4>
+            <h4 id="játékfizika">Játékfizika</h4>
             <code>self.speed
 self. gravity
 self.jump_speed
 self.on_ground</code>
             <p>self.speed: játékos gyorsaságának meghatározása, self. gravity: A gravitáció erősségét határozza meg, self.jump_speed: Az ugrás sebességét adja meg, self.on_ground: Az elrugaszkodás csak akkor történhet meg ha a karakter a felszínen áll</p>
-            <h4>Mozgás figyelése</h4>
+            <h4 id="mozgás">Mozgás figyelése</h4>
 <code>def get_input(self):
 keys = pygame.key.get_pressed()
 </code>
@@ -144,7 +108,7 @@ self.direction.y = self.jump_speed+*+
 
             <img src="img/játékos a pályán képei/ugrás_kis_mozgás.gif" alt="gif" class="mx-auto d-block img_border img-fluid">
 
-            <h4>Ütközések</h4>
+            <h4 id="ütközések">Ütközések</h4>
 
 <code>def horizontal_movement_collision(self):
 player = self.player.sprite
@@ -174,11 +138,14 @@ for sprite in self.terrain_tiles.sprites():
             <p>Bejárja a csempéket egy for ciklussal. Ütközés irányának megadása(Itt mindig az y irányú elmozdulást vesszük figyelembe): if player.direction.y < 0. player.rect.bottom = sprite.rect.top: A játékos a platform tetejére érkezik. Meg kell akadályozni a további ütközéseket!
                  player.on_ground = True: A játékos egy platformon áll. nincsenek további ütközések. Ugyanezt megcsinálja a másik irányból való ütküzéssel, csak itt nem akadályozza meg a további ütközéseket.</p>
 
-            <h1 id="vég">Vég</h1> <br>
+            <h1 id="összegzés">Összegzés</h1> <br>
 
-            <h4>Összegezve</h4>
 
-            <img src="img/játékos a pályán képei/sok_ugrálás.gif" alt="" class="mx-auto d-block img_border img-fluid">
+            <div class="text-center">
+                <img src="img/játékos a pályán képei/sok_ugrálás.gif" alt="" class="mx-auto d-block img_border img-fluid">
+                <p class="text_border">Összegezve így néz ki a játékos mozgása.</p>
+            </div>
+            
 
             
 
@@ -205,7 +172,9 @@ for sprite in self.terrain_tiles.sprites():
 
 
     <script>
-        $(".navbar").load("nav.html");
+        $(".navbar").load("nav.html", () => {
+            $("#nav-summary").html($("#summary").html());
+        });
     </script>
 </body>
 </html>
