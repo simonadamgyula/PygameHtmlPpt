@@ -78,7 +78,7 @@ const number = () => {
                 highlighted = true;
             }
 
-            result += `<span class="${highlighted ? 'highlighted' : ''}"><span class="number">${j + 1}</span>${line}</span>`;
+            result += `<span data-line-number="${j + 1}" class="${highlighted ? 'highlighted' : ''}">${line}</span>`;
         }
 
         console.log(result);
