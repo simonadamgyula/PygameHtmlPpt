@@ -56,8 +56,8 @@
         self.player = pygame.sprite.GroupSingle()
         self.terrain_tiles = pygame.sprite.Group
         self.world_shift = 0+*+
-        self.setup_level(level_data)
-            </code>
+        self.setup_level(level_data)</code>
+        
             <p>world_shift változó: a pálya mozgásának értéke lesz.</p>
             <p>Alapértéke az nulla, hiszen amikor a játékos a képernyő közepső sávjában áll, akkor a játékos maga mozog,
                 a csempe mozdulatlan.</p>
@@ -66,8 +66,8 @@
     def scroll_x(self):
             player = self.player.sprite+*+
             player_x = player.rect.centerx+*+
-            direction_x = player.direction.x+*+
-            </code>
+            direction_x = player.direction.x+*+</code>
+
             <p>
                 Létrehozott egy új, scrollozásért felelős metódust, amit scroll_x-nek nevez.
             </p>
@@ -89,8 +89,8 @@
 
         if player_x < screen_width / 4 and direction_x < 0:+*+
                 self.world_shift = 8+*+
-                player.speed = 0+*+
-                        </code>
+                player.speed = 0+*+</code>
+
             <p>Ha a játékos eléri a képernyő bal oldalának egynegyedét és továbbra is balra szeretne menni, a
                 world_shift értékét 8-ra állítja, azaz a képernyő jobbra fog mozdulni 8 pixel sebességgel és a
                 player.speed változót 0-ra rakja, hogy a játékos ne mozduljon.</p>
@@ -108,8 +108,8 @@
             player.speed = 0
         elif player_x > screen_width - (screen_width / 4) and direction_x > 0:+*+
             self.world_shift = -8+*+
-            player.speed = 0+*+
-            </code>
+            player.speed = 0+*+</code>
+
             <p>Meg kell csinálni ugyan ezt a másik oldallal is, de nyílván az értékeket át kell írni, hogy jobb oldalon
                 működjön.</p>
             <code file="level.py">class Level:
@@ -127,8 +127,8 @@
             player.speed = 0
         else:+*+
                 self.world_shift = 0+*+
-                player.speed = 8+*+
-            </code>
+                player.speed = 8+*+</code>
+
             <p>Végül egy else ágat is létrehoz: leállítja a képernyő mozgását és beállítja a player_speed változót 8-ra,
                 hogy újra a játékos mozogjon.</p>
             <code file="level.py">class Level:
@@ -139,15 +139,15 @@
         self.vertical_movement_collision()
         self.terrain_tiles.draw(self.display_surface)
         self.scroll_x()+*+
-        self.player.draw(self.display_surface)        
-            </code>
+        self.player.draw(self.display_surface)</code>
+
             <p>a run metódust kiegészíti és meghívja a scroll_x metódust</p>
             <h1 id="tile">Tile class fejlesztése</h1>
             <code file="tiles.py">class Tile:
     ...
     def update(self, shift):+*+
-        self.rect.x += shift+*+
-            </code>
+        self.rect.x += shift+*+</code>
+
             <p>Shift jelzi majd, hogy mennyivel kell eltolnunk a csempéket és milyen irányban.</p>
             <p>A self.rect.x += shift-el pedig meghívja a csempékre vonatkozó rect objectumnak az x összetevőjét, az
                 összes olyan csempeosztály, mely ennek a csempeosztálynak(Tile class) a leszármazottja rendelkezni fog
@@ -161,8 +161,8 @@
         self.terrain_tiles.update(self.world_shift)+*+
         self.terrain_tiles.draw(self.display_surface)
         self.scroll_x()
-        self.player.draw(self.display_surface)        
-            </code>
+        self.player.draw(self.display_surface)</code>
+
             <p>Meg kell hívni az update eljárást. Self.terrain_tiles.update(self.world_shift): a zárójelben az eltolás
                 mértékét adta meg</p>
             <p>Nem szükséges nekünk minden egyes csempét bejárnunk, mivel a pygame ezt megcsinálja helyettünk, így a
