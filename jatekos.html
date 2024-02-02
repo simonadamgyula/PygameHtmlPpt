@@ -20,6 +20,7 @@
 
 <link rel="stylesheet" href="./css/style.css">
 <link rel="stylesheet" href="./css/code.css">
+<link rel="stylesheet" href="./css/jatekos.css">
 
 <script src="./js/highlighting.js"></script>
     <title>Játékos a pályán</title>
@@ -79,7 +80,7 @@
             <h1 id="kezdet">Bevezetés</h1>
             <p>Ebben a fejezetben a játékos létrehozásáról és a mozgásáról lesz szó.</p> <br>
             <p>A cél: Játékos akadálytalan mozgása és a játékos ütközéseinek létrehozása.</p>
-            <img src="img/játékos a pályán képei/sok_ugrálás.gif" alt="gif">
+            <img src="img/játékos a pályán képei/sok_ugrálás.gif" alt="gif" class="mx-auto d-block img_border img-fluid">
 
             <h1>Közép</h1> <br>
             <h2>Level class</h2>
@@ -125,17 +126,62 @@ elif keys(pygame.K_LEFT):+*+
     self.direction.x = -1+*+
 else:
     self.direction.x = 0</code>
-
-<code></code>
-
-
-
-
-
-
-    <img src="img/játékos a pályán képei/ugrás_kis_mozgás.gif" alt="">
             <p>if keys[pygame.K_RIGHT]:self.direction.x= 1   Ha a jobb nyíl lenyomásra kerül, akkor az x tengelyen halad ebben az esetben jobbra 1-et. Az elif ág a bal oldali mozgást definiálja. else: self.direction.x = 0 azt jelenti, ha a játékos nem nyomja le egyik billentyűt se akkor ne mozogjon a karakter.</p>
-            <h1 id="vég">Vég</h1>
+
+<code>if keys[pygame.K_SPACE] and self.on_ground:
+self.on_ground = False
+self.jump()</code>
+            <p>Ez a metódus figyeli a SPACE gomb lenyomásra kerülését. Ha lenyomásra kerül a SPACE billentyű, akkor ugrik egyet a karakter.</p>
+
+<code>def apply_gravity(self):
+self.direction.y = self.gravity+*+
+self.rect.y += self.direction.y+*+
+
+def jump(self):
+self.direction.y = self.jump_speed+*+
+</code>
+            <p>Az apply_gravity metódus létrehozza a gravitációt az y tengelyhez viszonyítva. A jump metódus az y tengelytől valüó elrugaszkodás sebességét adja meg.</p>
+
+            <img src="img/játékos a pályán képei/ugrás_kis_mozgás.gif" alt="gif" class="mx-auto d-block img_border img-fluid">
+
+            <h4>Ütközések</h4>
+
+<code>def horizontal_movement_collision(self):
+player = self.player.sprite
+player.rect.x += player.direction.x * player.speed+*+
+</code>
+            <p>Megnöveli az x koordináta értékét az elmozdulás irányának és a játékos sebességének a szorzatával.</p>
+<code>for sprite in self.terrain_tiles.sprites():
+    if sprite.rect.colliderect(player.rect):+*+
+        if player.direction.x < 0:+*+
+            player.rect.left = sprite.rect.right+*+
+        if player.direction.x > 0:+*+
+            player.rect.right = sprtie.rect.left+*+</code>
+            <p>Megadja az ütközés irányát (mindig a játékos x irányú elmozdulását vesszük figyelembe): if player.direction.x < 0 -> tudjuk, hogy a csempe jobbról tartotta fel a játékosunkat. player.rect.left = sprite.rect.right: Így a csempe nem engedi a jobb oldali mozgását a karakternek. Ezt másik irányból  irányból megcsinálja.</p>
+<code>def vertical_movement_collision(self):
+player = self.player.sprite
+player.apply_gravity()
+
+for sprite in self.terrain_tiles.sprites():
+    if sprite.rect.colliderect(player.rect):+*+
+        if player.direction.y > 0:+*+
+            player.rect.bottom = sprite.rect.top+*+
+            player.direction.y = 0+*+
+            player.on_ground = True+*+
+        elif player.direction.y < 0:+*+
+            player.rect.top = sprite.rect.bottom+*+
+            player.direction.y = 0+*+</code>
+            <p>Bejárja a csempéket egy for ciklussal. Ütközés irányának megadása(Itt mindig az y irányú elmozdulást vesszük figyelembe): if player.direction.y < 0. player.rect.bottom = sprite.rect.top: A játékos a platform tetejére érkezik. Meg kell akadályozni a további ütközéseket!
+                 player.on_ground = True: A játékos egy platformon áll. nincsenek további ütközések. Ugyanezt megcsinálja a másik irányból való ütküzéssel, csak itt nem akadályozza meg a további ütközéseket.</p>
+
+            <h1 id="vég">Vég</h1> <br>
+
+            <h4>Összegezve</h4>
+
+            <img src="img/játékos a pályán képei/sok_ugrálás.gif" alt="" class="mx-auto d-block img_border img-fluid">
+
+            
+
 
 
 
