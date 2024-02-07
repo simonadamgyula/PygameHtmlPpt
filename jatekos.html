@@ -121,7 +121,7 @@ def jump(self):
             player.rect.left = sprite.rect.right+*+
         if player.direction.x > 0:+*+
             player.rect.right = sprtie.rect.left+*+</code>
-            <p>Megadja az ütközés irányát (mindig a játékos x irányú elmozdulását vesszük figyelembe): if player.direction.x < 0 -> tudjuk, hogy a csempe jobbról tartotta fel a játékosunkat. player.rect.left = sprite.rect.right: Így a csempe nem engedi a jobb oldali mozgását a karakternek. Ezt másik irányból  irányból megcsinálja.</p>
+            <p>Megadja az ütközés irányát (mindig a játékos x irányú elmozdulását vesszük figyelembe): if player.direction.x < 0. player.rect.left = sprite.rect.right: Így a csempe nem engedi a jobb oldali mozgását a karakternek. Ezt másik irányból  irányból megcsinálja.</p>
 <code>def vertical_movement_collision(self):
     player = self.player.sprite
     player.apply_gravity()
