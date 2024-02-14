@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             header.classList.add("code-header");
             header.innerHTML = `<div><i class="fa-regular fa-file"></i>${fileName}</div>`;
 
-            codesToCopy.push(el.innerHTML);
+            codesToCopy.push(el.innerHTML.replace(/\+\*\+/g, ""));
 
             let copy = document.createElement("i");
             copy.classList.add("fa-regular", "fa-copy");
@@ -81,7 +81,6 @@ const number = () => {
             result += `<span data-line-number="${j + 1}" class="${highlighted ? 'highlighted' : ''}">${line}</span>`;
         }
 
-        console.log(result);
         code.innerHTML = result;
     }
 }
